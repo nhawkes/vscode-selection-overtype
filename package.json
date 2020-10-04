@@ -1,9 +1,17 @@
 {
   "name": "selection-overtype",
   "displayName": "Selection Overtype",
-  "description": "Typing with a selection active overtypes rather than deleting the selection",
+  "description": "Typing with a selection active overtypes with matching case",
   "version": "0.0.1",
   "publisher": "nhawkes",
+  "repository": "https://github.com/nhawkes/vscode-selection-overtype",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "keywords": [
+    "overtype",
+    "overwrite",
+    "case"
+  ],
   "engines": {
     "vscode": "^1.49.0"
   },
