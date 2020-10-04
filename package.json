@@ -2,7 +2,7 @@
   "name": "selection-overtype",
   "displayName": "Selection Overtype",
   "description": "Typing with a selection active overtypes with matching case",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "nhawkes",
   "repository": "https://github.com/nhawkes/vscode-selection-overtype",
   "license": "MIT",
