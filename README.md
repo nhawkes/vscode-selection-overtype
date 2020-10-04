@@ -6,7 +6,7 @@ e.g. `count` and `setCount`
 
 ![overtype selection](images/demo.gif)
 
-If you don't want this behaviour you can just delete the selection first.
+If you don't want this behaviour you can just delete the selection first. Symbols are ignored to support surrounding with brackets.
 
 ## Requirements
 

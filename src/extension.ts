@@ -15,6 +15,11 @@ export function activate(context: vscode.ExtensionContext) {
 		if (selections.length === 0 || selections[0].isEmpty) {
 			return vscode.commands.executeCommand("default:type", args);
 		}
+		const match = args.text !== args.text.toUpperCase();
+		const invert = args.text !== args.text.toLowerCase();
+		if (!(match || invert)) {
+			return vscode.commands.executeCommand("default:type", args);
+		}
 		const newSelections = selections.map(selection => {
 			if (!editor || selection.isEmpty) {
 				return {
@@ -27,7 +32,6 @@ export function activate(context: vscode.ExtensionContext) {
 			const char = editor.document.getText(replaceSelection);
 			const isCharUpper = char !== char.toLowerCase();
 			const isCharLower = char !== char.toUpperCase();
-			const invert = args.text === args.text.toUpperCase();
 			const toUpper = !invert ? isCharUpper : isCharLower;
 			const toLower = !invert ? isCharLower : isCharUpper;
 			return {
