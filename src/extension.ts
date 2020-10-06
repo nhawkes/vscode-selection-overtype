@@ -15,9 +15,9 @@ export function activate(context: vscode.ExtensionContext) {
 		if (selections.length === 0 || selections[0].isEmpty) {
 			return vscode.commands.executeCommand("default:type", args);
 		}
-		const match = args.text !== args.text.toUpperCase();
-		const invert = args.text !== args.text.toLowerCase();
-		if (!(match || invert)) {
+		const textIsLower = args.text !== args.text.toUpperCase();
+		const textIsUpper = args.text !== args.text.toLowerCase();
+		if (!(textIsLower || textIsUpper)) {
 			return vscode.commands.executeCommand("default:type", args);
 		}
 		const newSelections = selections.map(selection => {
@@ -30,27 +30,29 @@ export function activate(context: vscode.ExtensionContext) {
 			const replaceSelection = new vscode.Selection(selection.start, newStart);
 			const newSelection = new vscode.Selection(selection.end, newStart);
 			const char = editor.document.getText(replaceSelection);
-			const isCharUpper = char !== char.toLowerCase();
-			const isCharLower = char !== char.toUpperCase();
-			const toUpper = !invert ? isCharUpper : isCharLower;
-			const toLower = !invert ? isCharLower : isCharUpper;
 			return {
 				replaceSelection,
 				newSelection,
-				toUpper,
-				toLower
+				char
 			};
 		});
+		const primaryCharIsUpper = newSelections[0].char !== newSelections[0]?.char?.toLowerCase();
+		const swapCase = primaryCharIsUpper !== textIsUpper ? true : false;
+
 		editor.edit(editBuilder => {
 			newSelections.map(x => {
 				if (!x.replaceSelection) {
 					return;
 				}
+				const isCharUpper = x.char !== x.char.toLowerCase();
+				const isCharLower = x.char !== x.char.toUpperCase();
+				const toUpper = !swapCase ? isCharUpper : isCharLower;
+				const toLower = !swapCase ? isCharLower : isCharUpper;
 				let text = args.text;
-				if (x.toUpper) {
+				if (toUpper) {
 					text = text.toUpperCase();
 				}
-				if (x.toLower) {
+				if (toLower) {
 					text = text.toLowerCase();
 				}
 				editBuilder.replace(x.replaceSelection, text);

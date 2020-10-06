@@ -1,6 +1,6 @@
 ## Features
 
-Typing with a selection active overtypes rather than deleting the selection. The case is matched - lowercase letters match the case being overtyped whereas uppercase letters invert case. This is useful for replacing text with different cases.
+Typing with a selection active overtypes rather than deleting the selection. If there is a single selection then the case matches what you type as usual, any additional selections will only change case if this first selection changes case, otherwise case is preserved. This is useful for replacing text with different cases.
 
 e.g. `count` and `setCount`
 
