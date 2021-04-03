@@ -18,7 +18,8 @@ export function activate(context: vscode.ExtensionContext) {
 		const textIsLower = args.text !== args.text.toUpperCase();
 		const textIsUpper = args.text !== args.text.toLowerCase();
 		const textIsNumber = args.text >= '0' && args.text <= '9';
-		if (!(textIsLower || textIsUpper||textIsNumber)) {
+		const textIsSpace = args.text === ' ';
+		if (!(textIsLower || textIsUpper || textIsNumber || textIsSpace)) {
 			return vscode.commands.executeCommand("default:type", args);
 		}
 		const newSelections = selections.map(selection => {
